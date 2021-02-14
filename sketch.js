@@ -67,6 +67,10 @@ function setup() {
   returnPlane.style('opacity', 0);
   returnPausePlane.style('opacity', 0);
 
+  var allElements = [];
+  allElements.push(letter, journal, returnEl);
+  allElements.flat().map((element) => element.hide());
+
 
   journalButton.mousePressed(drawJournal);
   confirmNameBut.mousePressed(getName);
@@ -105,10 +109,10 @@ function setup() {
         getResponseTan(currentGrat);
       }
       paperOut = false; // the paper disappears
-      //letterImage.hide(); // hide the paper
+      letterImage.hide(); // hide the paper
       //inOut = true;
       fadeEverythingLetter('out');
-      setTimeout(() => letter.map((element) => element.hide()), 500);
+      setTimeout(() => letter.map((element) => element.hide()), 400);
       //fadeInOut('out', journalImage);
       //writeBox.hide();
       writeBox.value(''); // reset the value in writeBox
