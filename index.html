@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>don't be a stranger!</title>
+
+  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+  <script src="libraries/p5.js"></script>
+	<script src="libraries/p5.dom.js"></script>
+	<script src="libraries/p5.sound.js"></script>
+	<script src="sketch.js"></script>
+
+
+  <style>
+    @font-face {
+      font-family: 'Sniglet Regular';
+      font-style: normal;
+      font-weight: normal;
+      src: local('Sniglet Regular'), url('Sniglet-Regular.woff') format('woff');
+    }
+    canvas {
+      margin: auto;
+    }
+
+    body {
+      margin:0;
+      padding:0;
+      background-image: url("sky-bg.jpg");
+    }
+
+    img {
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+    }
+
+    button {
+      outline:none;
+      border:none;
+    }
+
+    .letterImage {
+      opacity:0;
+
+    }
+
+    .journalImage {
+      opacity:0;
+    }
+
+    .writeBox {
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+
+      width:300px;
+      height:150px;
+      resize:none;
+      font-size:25px;
+      font-family: 'Sniglet Regular';
+      border:none;
+      outline:none;
+      opacity:0;
+
+      padding:10px;
+    }
+
+    .letterStarter {
+      position:absolute;
+      top:150px;
+      left:50%;
+      transform:translate(-50%,-50%);
+      opacity:0;
+      font-family: 'Sniglet Regular';
+      font-size:20px;
+
+
+    }
+
+    .button {
+      position:fixed;
+      top:75%;
+      border-radius: 30px;
+      font-size: 25px;
+      font-family: 'Sniglet Regular';
+      padding: 40px;
+
+    }
+    .write {
+      right:5%;
+    }
+
+    .journal {
+      left: 5%;
+    }
+
+    .wholeJournal {
+      position:relative;
+      top:50%;
+      left:50%;
+
+    }
+    .page {
+
+      float:left;
+
+      position:fixed;
+      padding:10px;
+      height:400px;
+      width:220px;
+      top:300px;
+      transform:translate(-50%,-50%);
+
+
+      font-family: "Sniglet Regular";
+    }
+
+    .left {
+      position:absolute;
+      left:-145px;
+      opacity:0;
+
+    }
+    .right {
+      position:absolute;
+      left:145px;
+      opacity:0;
+
+    }
+    .arrow {
+      position:absolute;
+      top:500px;
+
+    }
+    .next {
+      left: 200px;
+      opacity:0;
+    }
+    .back {
+      left: -200px;
+      opacity:0;
+    }
+
+    .plane {
+      position:fixed;
+      top: 45%;
+      left:90px;
+      opacity:0;
+    }
+    .returnImage {
+      opacity:0;
+    }
+    .returnText {
+      opacity:0;
+      position:fixed;
+      transform:translate(-50%,-50%);
+      font-size:20px;
+      float:left;
+      top:50%;
+      left:50%;
+      padding:10px;
+      height:400px;
+      width:270px;
+
+
+    }
+
+    .startScreen {
+      position:relative;
+      top:50%;
+      left:50%;
+
+    }
+
+    .nameBox {
+      padding:8px;
+      border:none;
+      border-radius:8px;
+      outline:none;
+      font-size:20px;
+      font-family: 'Sniglet Regular';
+      width:130px;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+
+      position:fixed;
+    }
+
+    .confirmNameBut {
+      position:absolute;
+      padding: 8px;
+
+      left:105px;
+      top:305px;
+      transform:translate(-50%,-50%);
+      font-family:'Sniglet Regular';
+      font-size:15px;
+
+      border-radius: 10px;
+      border:none;
+
+      outline:none;
+
+    }
+    .instructions {
+      position:fixed;
+      top:75%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:450px;
+      font-family:'Sniglet Regular';
+      opacity:0;
+      transition:0.5s;
+      text-align:center;
+    }
+     button:hover {
+      background-color: #aaa;
+
+    }
+    textarea:hover, input:hover {
+      border:3px solid;
+      border-color:#FFD09F;
+      border-radius:10px;
+    }
+    .instructions:hover {
+      opacity:1;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <div class="main">
+    <img src="building-static.png" width=1200px>
+    <img src="char-idle.gif" width = 1000px>
+  </div>
+
+  <img src="paperap.GIF" class="plane moving" width=400px>
+  <img src="static-plane.gif" class="plane static" width = 400px>
+
+  <div class="return">
+    <img src="return-letter-ph.png" class="returnImage">
+    <div class="returnText">
+      <p></p>
+    </div>
+  </div>
+
+  <div class="wholeJournal">
+    <img src="journal-final.png" width= 650 class="journalImage">
+    <div class="page left">
+      <p>left page</p>
+    </div>
+    <div class="page right">
+      <p></p>
+    </div>
+    <img src="right-arrow.png" width=50 class="arrow next">
+    <img src="left-arrow.png" width=50 class="arrow back">
+  </div>
+
+  <div class="letter">
+    <img src="paper-final.png" class="letterImage" width=450px>
+
+    <textarea rows="3" class="writeBox"></textarea>
+    <div class="letterStarter">
+      <p>Today, I am grateful for</p>
+    </div>
+  </div>
+
+  <button class="button write">write</button>
+  <button class="button journal">journal</button>
+
+  <div class="startScreen">
+    <img src="start-screen.jpg" class="startImage" width=1300px>
+    <input class="nameBox"></input>
+    <button class="confirmNameBut">Go</button>
+    <div class="instructions">
+      <p>welcome! please write your name in the field above. <br> this is your space to jot down and remember all the random things in life that make you smile. <br> use the 'write' button to send letters to your friend Tan. use the 'journal' button to view all your gratitudes. <br> Tan will send letters back to you! click on them to view their message. click on them again to collect them. <br> that's all! hope this tool is helpful. </p>
+    </div>
+  </div>
+
+</body>
+</html>
