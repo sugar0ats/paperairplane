@@ -1,30 +1,26 @@
 var grats = [];
 var currentAirplanes = [];
 var name;
-var uploadedDataPoints = [name, currentAirplanes, grats];
-
-function preload() {
-  paperAirplane = loadImage('arrow-placeholder.png');
-}
+//var uploadedDataPoints = [name, currentAirplanes, grats];
 
 function setup() {
 
-  var firebaseConfig = {
-    apiKey: "AIzaSyCVEIBTfUeGmzXWB0kHCFtky0PAqN9SLFw",
-    authDomain: "paperplane-79052.firebaseapp.com",
-    projectId: "paperplane-79052",
-    storageBucket: "paperplane-79052.appspot.com",
-    messagingSenderId: "523526921107",
-    appId: "1:523526921107:web:50266ebff6fc08a7616666",
-    measurementId: "G-C0TEK0NF2G"
-  };
+  //var firebaseConfig = {
+    //apiKey: "AIzaSyCVEIBTfUeGmzXWB0kHCFtky0PAqN9SLFw",
+    //authDomain: "paperplane-79052.firebaseapp.com",
+    //projectId: "paperplane-79052",
+    //storageBucket: "paperplane-79052.appspot.com",
+    //messagingSenderId: "523526921107",
+    //appId: "1:523526921107:web:50266ebff6fc08a7616666",
+    //measurementId: "G-C0TEK0NF2G"
+  //};
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-  console.log(firebase);
+  //firebase.initializeApp(firebaseConfig);
+  //firebase.analytics();
+  //console.log(firebase);
 
-  var database = firebase.database();
-  var ref = database.ref('accounts');
+  //var database = firebase.database();
+  //var ref = database.ref('accounts');
 
 
   planeStatus();
@@ -86,19 +82,19 @@ function setup() {
     name = nameBox.value();
     fadeEverythingStart('out');
     setTimeout(() => start.map((element) => element.hide()), 500);
-    uploadToDataBase(name, currentAirplanes, grats);
+    //uploadToDataBase(name, currentAirplanes, grats);
 
   }
 
-  function uploadToDataBase(name, currentAirplanes, grats) {
+  //function uploadToDataBase(name, currentAirplanes, grats) {
     //uploadedDataPoints.map((data) => typeof data == undefined ? data = "undefined" : console.log('all good to go!'));
-    var data = {
-      "accName": name || null,
-      "planes": currentAirplanes || null,
-      "gratitudes": grats || null
-    }
-    ref.push(data);
-  }
+    //var data = {
+      //"accName": name || null,
+      //"planes": currentAirplanes || null,
+      //"gratitudes": grats || null
+    //}
+    //ref.push(data);
+  //}
 
   function sendMessage() {
     if (paperOut) { // hide the letter, record values
@@ -159,7 +155,7 @@ function setup() {
       console.log(currentDate == month()+day()+year());
 
     }
-    uploadToDataBase(name, currentAirplanes, grats);
+    //uploadToDataBase(name, currentAirplanes, grats);
 
   }
 
