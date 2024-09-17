@@ -1,4 +1,1 @@
-# paperairplane
-"life sucks, doesn't it?"
-
-just a tool to help people track what they're grateful for :D
+a simple tool and journaling app to help people track what they're grateful for
